@@ -31,13 +31,9 @@ function loadScript(src) {
 			super(); 
 		
 			let shadowRoot = this.attachShadow({mode: "open"});
-			
-				
-				
-
-				shadowRoot.appendChild(my_awesome_script);
-				shadowRoot.appendChild(tmpl.content.cloneNode(true));					
-			
+			shadowRoot.appendChild(tmpl.content.cloneNode(true));					
+			this._props = {};
+			this._firstConnection = 0;
 		}
 
 
