@@ -96,7 +96,7 @@ function loadScript(src) {
 
         loadthis(){
 			
-			let myChart = this.shadowRoot.getElementById('chartdiv');
+		/*	let myChart = this.shadowRoot.getElementById('chartdiv');
 			myChart.style.height = this.shadowRoot.host.clientHeight - 20 + "px";
 			myChart.style.width = this.shadowRoot.host.clientWidth - 20 + "px";
 						
@@ -145,7 +145,7 @@ series.colors.step = 3;
 series.hiddenState.properties.endAngle = -90;
 
 chart.legend = new am4charts.Legend();
-// end am4core.ready()
+// end am4core.ready() */
         }
     
     
