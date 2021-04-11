@@ -10,10 +10,6 @@
 
 </style>
 
-<!-- Resources -->
-<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 
 <!-- Chart code -->
 <script>
@@ -77,7 +73,23 @@ chart.legend = new am4charts.Legend();
 
 		constructor() {
 			super(); 
+		
 			let shadowRoot = this.attachShadow({mode: "open"});
+			
+			var my_awesome_script = document.createElement('script');
+			my_awesome_script.setAttribute('src',"https://cdn.amcharts.com/lib/4/core.js");
+			shadowRoot.appendChild(my_awesome_script);
+			
+			var my_awesome_script = document.createElement('script');
+			my_awesome_script.setAttribute('src',"https://cdn.amcharts.com/lib/4/charts.js");
+			shadowRoot.appendChild(my_awesome_script);
+			
+			var my_awesome_script = document.createElement('script');
+			my_awesome_script.setAttribute('src',"https://cdn.amcharts.com/lib/4/themes/animated.js");
+			shadowRoot.appendChild(my_awesome_script);
+			
+			
+			
 			shadowRoot.appendChild(tmpl.content.cloneNode(true));
 		}
 
@@ -125,3 +137,4 @@ chart.legend = new am4charts.Legend();
     });
         
 })();
+
