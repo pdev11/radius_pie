@@ -11,10 +11,32 @@
 </style>
 
 
-<!-- Chart code -->
-<script>
-am4core.ready(function() {
+<div id="chartdiv"></div>
+    `;
 
+    customElements.define('com-sap-sample-piechart1', class WidgetTemplate extends HTMLElement {
+
+
+		constructor() {
+			super(); 
+		
+			let shadowRoot = this.attachShadow({mode: "open"});
+			
+			var my_awesome_script = document.createElement('script');
+			my_awesome_script.setAttribute('src',"https://cdn.amcharts.com/lib/4/core.js");
+			shadowRoot.appendChild(my_awesome_script);
+			
+			var my_awesome_script = document.createElement('script');
+			my_awesome_script.setAttribute('src',"https://cdn.amcharts.com/lib/4/charts.js");
+			shadowRoot.appendChild(my_awesome_script);
+			
+			var my_awesome_script = document.createElement('script');
+			my_awesome_script.setAttribute('src',"https://cdn.amcharts.com/lib/4/themes/animated.js");
+
+			shadowRoot.appendChild(my_awesome_script);
+			shadowRoot.appendChild(tmpl.content.cloneNode(true));
+			
+			
 // Themes begin
 am4core.useTheme(am4themes_animated);
 // Themes end
@@ -60,37 +82,9 @@ series.colors.step = 3;
 series.hiddenState.properties.endAngle = -90;
 
 chart.legend = new am4charts.Legend();
-
-}); // end am4core.ready()
-</script>
-
-<!-- HTML -->
-<div id="chartdiv"></div>
-    `;
-
-    customElements.define('com-sap-sample-piechart1', class WidgetTemplate extends HTMLElement {
-
-
-		constructor() {
-			super(); 
-		
-			let shadowRoot = this.attachShadow({mode: "open"});
+// end am4core.ready()
+					
 			
-			var my_awesome_script = document.createElement('script');
-			my_awesome_script.setAttribute('src',"https://cdn.amcharts.com/lib/4/core.js");
-			shadowRoot.appendChild(my_awesome_script);
-			
-			var my_awesome_script = document.createElement('script');
-			my_awesome_script.setAttribute('src',"https://cdn.amcharts.com/lib/4/charts.js");
-			shadowRoot.appendChild(my_awesome_script);
-			
-			var my_awesome_script = document.createElement('script');
-			my_awesome_script.setAttribute('src',"https://cdn.amcharts.com/lib/4/themes/animated.js");
-			shadowRoot.appendChild(my_awesome_script);
-			
-			
-			
-			shadowRoot.appendChild(tmpl.content.cloneNode(true));
 		}
 
 
@@ -137,4 +131,3 @@ chart.legend = new am4charts.Legend();
     });
         
 })();
-
