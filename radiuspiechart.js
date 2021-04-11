@@ -36,7 +36,6 @@
 			shadowRoot.appendChild(my_awesome_script);
 			shadowRoot.appendChild(tmpl.content.cloneNode(true));
 			
-			
 
 					
 			
@@ -80,12 +79,15 @@
         */
 
         redraw(){
-		// Themes begin
+			
+			let myChart = this.shadowRoot.getElementById('chartdiv');
+						
+// Themes begin
 am4core.useTheme(am4themes_animated);
 // Themes end
 
 // Create chart
-var chart = am4core.create("chartdiv", am4charts.PieChart);
+var chart = am4core.create(myChart, am4charts.PieChart);
 chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
 chart.data = [
