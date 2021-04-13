@@ -105,7 +105,7 @@ am4core.useTheme(am4themes_animated);
 // Themes end
 
 // Create chart
-var chart = am4core.create("chartdiv", am4charts.SlicedChart);
+let chart = am4core.create("myChart", am4charts.SlicedChart);
 //chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
 chart.data = [{
@@ -131,7 +131,7 @@ chart.data = [{
   "value": 10
 }];
 
-var series = chart.series.push(new am4charts.FunnelSeries());
+let series = chart.series.push(new am4charts.FunnelSeries());
 series.dataFields.value = "value";
 series.dataFields.category = "name";
 
@@ -143,9 +143,10 @@ series.alignLabels = true;
 
 series.labels.template.text = "{category}: [bold]{value}[/]";
 
-chart.legend = new am4charts.Legend();
-// end am4core.ready()
-     //   }
+	// end am4core.ready()
+		
+	}
+       
     
     
     });
