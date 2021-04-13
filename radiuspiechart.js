@@ -106,7 +106,7 @@ am4core.useTheme(am4themes_animated);
 
 // Create chart
 let chart = am4core.create("myChart", am4charts.SlicedChart);
-//chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
 chart.data = [{
   "name": "Stage #1",
