@@ -105,42 +105,46 @@ am4core.useTheme(am4themes_animated);
 // Themes end
 
 // Create chart
-let chart = am4core.create("myChart", am4charts.SlicedChart);
+var chart = am4core.create(myChart, am4charts.PieChart);
+chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-chart.data = [{
-  "name": "Stage #1",
-  "value": 600
-}, {
-  "name": "Stage #2",
-  "value": 300
-}, {
-  "name": "Stage #3",
-  "value": 200
-}, {
-  "name": "Stage #4",
-  "value": 180
-}, {
-  "name": "Stage #5",
-  "value": 50
-}, {
-  "name": "Stage #6",
-  "value": 20
-}, {
-  "name": "Stage #7",
-  "value": 10
-}];
+chart.data = [
+  {
+    country: "Lithuania",
+    value: 260
+  },
+  {
+    country: "Czechia",
+    value: 230
+  },
+  {
+    country: "Ireland",
+    value: 200
+  },
+  {
+    country: "Germany",
+    value: 165
+  },
+  {
+    country: "Australia",
+    value: 139
+  },
+  {
+    country: "Austria",
+    value: 128
+  }
+];
 
-let series = chart.series.push(new am4charts.FunnelSeries());
+var series = chart.series.push(new am4charts.PieSeries());
 series.dataFields.value = "value";
-series.dataFields.category = "name";
+series.dataFields.radiusValue = "value";
+series.dataFields.category = "country";
+series.slices.template.cornerRadius = 6;
+series.colors.step = 3;
 
-var fillModifier = new am4core.LinearGradientModifier();
-fillModifier.brightnesses = [-0.5, 1, -0.5];
-fillModifier.offsets = [0, 0.5, 1];
-series.slices.template.fillModifier = fillModifier;
-series.alignLabels = true;
+series.hiddenState.properties.endAngle = -90;
 
-series.labels.template.text = "{category}: [bold]{value}[/]";
+chart.legend = new am4charts.Legend();
 // end am4core.ready()
         }
     
