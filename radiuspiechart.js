@@ -24,7 +24,7 @@ function loadScript(src) {
 		});
 	}	
 
-    customElements.define('com-sap-sample-piechart1', class WidgetTemplate extends HTMLElement {
+    customElements.define('com-sap-sample-helloworld3', class WidgetTemplate extends HTMLElement {
 
 
 		constructor() {
@@ -35,8 +35,9 @@ function loadScript(src) {
 			this._props = {};
 			this._firstConnection = 0;
 			this._tagContainer;
-            //this._tagType = "h1";
+            this._tagType = "h1";
             this._tagText = "Hello World";
+
 		}
 
 
@@ -54,6 +55,7 @@ function loadScript(src) {
 					} finally {
 						that._firstConnection = 1;
 						that.loadthis();
+						this.redraw();
 					}
 				}
 				LoadLibs(this);
@@ -70,10 +72,6 @@ function loadScript(src) {
 				this.loadthis();
 			}
         }
-	     connectedCallback(){
-            this._firstConnection = true;
-            this.redraw(); 
-        }
          //When the custom widget is updated, the Custom Widget SDK framework executes this function first
 		onCustomWidgetBeforeUpdate(oChangedProperties) {
 
@@ -83,6 +81,7 @@ function loadScript(src) {
 		onCustomWidgetAfterUpdate(oChangedProperties) {
             if (this._firstConnection){
                 this.loadthis();
+		    this.redraw();
             }
         }
 		
@@ -100,26 +99,23 @@ function loadScript(src) {
         
         }
         */
-	    get widgetText() {
+	     get widgetText() {
             return this._tagType;
         }
 
         set widgetText(value) {
             this._tagText = value;
         }
-	    
-	    
-	    redraw(){
+	     redraw(){
             if (this._tagContainer){
                 this._tagContainer.parentNode.removeChild(this._tagContainer);
             }
 
             var shadow = window.getSelection(this._shadowRoot);
-            //this._tagContainer = document.createElement(this._tagType);
+            this._tagContainer = document.createElement(this._tagType);
             var theText = document.createTextNode(this._tagText);    
             this._tagContainer.appendChild(theText); 
-            //this._shadowRoot.appendChild(this._tagContainer);
-
+            this._shadowRoot.appendChild(this._tagContainer);
         }
 
         loadthis(){
