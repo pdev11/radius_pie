@@ -15,7 +15,14 @@
             "url": "https://pdev11.github.io/radius_pie/radiuspiechart.js",
             "integrity": "",
             "ignoreIntegrity" : true
-        }
+        },
+{
+			"kind": "styling",
+			"tag": "com-sap-sample-helloworld4-aps",
+            "url": "https://davidhstocker.github.io/SAC_CustomWidget_HelloWorld_4/aps_webcomponent.js",
+			"integrity": "",
+            "ignoreIntegrity" : true
+		}
     ],
 	"properties": {
     "widgetText": {
@@ -25,6 +32,17 @@
     }
 } ,
 	"methods": {
+		"setText": {
+			"description": "Set the text value of the widget",
+			"parameters": [
+				{
+					"name": "newTextValue",
+					"type": "string",
+					"description": "The displayed angle of the gauge"
+				}
+			],
+			"body": "this.widgetText = newTextValue;"
+		}
 	},
 	"events": {
 	}
