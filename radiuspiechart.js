@@ -1,16 +1,14 @@
 (function()  {
-	
 	const amchartscorejs = "https://cdn.amcharts.com/lib/4/core.js";
 	const amchartschartsjs = "https://cdn.amcharts.com/lib/4/charts.js";
 	const amchartsanimatedjs = "https://cdn.amcharts.com/lib/4/themes/animated.js"
-	
-	
     let tmpl = document.createElement('template');
     tmpl.innerHTML = `
 <div id="chartdiv"></div>
+<div id="chartdiv2"></div>
     `;
-	
-function loadScript(src) {
+
+	function loadScript(src) {
 		return new Promise(function(resolve, reject) {
 			let script = document.createElement('script');
 			script.src = src;
@@ -23,28 +21,27 @@ function loadScript(src) {
 			document.head.appendChild(script)
 		});
 	}	
-
-    customElements.define('com-sap-sample-helloworld3', class WidgetTemplate extends HTMLElement {
+	
+    customElements.define('com-sap-sample-helloworld3', class HelloWorld extends HTMLElement {
 
 
 		constructor() {
 			super(); 
-		
-			let shadowRoot = this.attachShadow({mode: "open"});
-			shadowRoot.appendChild(tmpl.content.cloneNode(true));					
-			this._props = {};
-			this._firstConnection = 0;
-			this._tagContainer;
+			this._shadowRoot = this.attachShadow({mode: "open"});
+            this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
+            this._firstConnection = false;
+            this._tagContainer;
             this._tagType = "h1";
             this._tagText = "Hello World";
+			//this._props = {};
 
 		}
 
-
         //Fired when the widget is added to the html DOM of the page
         connectedCallback(){
-			
-            if (this._firstConnection === 0) {
+            this._firstConnection = true;
+           // this.redraw();       
+		if (this._firstConnection === 0) {
 				async function LoadLibs(that) {
 					try {
 						await loadScript(amchartscorejs);
@@ -55,7 +52,6 @@ function loadScript(src) {
 					} finally {
 						that._firstConnection = 1;
 						that.loadthis();
-						this.redraw();
 					}
 				}
 				LoadLibs(this);
@@ -66,12 +62,12 @@ function loadScript(src) {
         disconnectedCallback(){
         
         }
-
-		onCustomWidgetResize(width, height){
+	    onCustomWidgetResize(width, height){
 			if (this._firstConnection === 1) {
 				this.loadthis();
 			}
         }
+
          //When the custom widget is updated, the Custom Widget SDK framework executes this function first
 		onCustomWidgetBeforeUpdate(oChangedProperties) {
 
@@ -80,43 +76,34 @@ function loadScript(src) {
         //When the custom widget is updated, the Custom Widget SDK framework executes this function after the update
 		onCustomWidgetAfterUpdate(oChangedProperties) {
             if (this._firstConnection){
-                this.loadthis();
-		    this.redraw();
+                //this.redraw();
+		     this.loadthis();
             }
         }
-		
-		
         
         //When the custom widget is removed from the canvas or the analytic application is closed
         onCustomWidgetDestroy(){
+        
         }
 
+        
         //When the custom widget is resized on the canvas, the Custom Widget SDK framework executes the following JavaScript function call on the custom widget
-        // Commented out by default.  If it is enabled, SAP Analytics Cloud will track DOM size changes and call this callback as needed
-        //  If you don't need to react to resizes, you can save CPU by leaving it uncommented.
+        // Commented out by default
         /*
         onCustomWidgetResize(width, height){
         
         }
         */
-	     get widgetText() {
+
+        //Getters and Setters
+        get widgetText() {
             return this._tagType;
         }
 
         set widgetText(value) {
             this._tagText = value;
         }
-	     redraw(){
-            if (this._tagContainer){
-                this._tagContainer.parentNode.removeChild(this._tagContainer);
-            }
-
-            var shadow = window.getSelection(this._shadowRoot);
-            this._tagContainer = document.createElement(this._tagType);
-            var theText = document.createTextNode(this._tagText);    
-            this._tagContainer.appendChild(theText); 
-            this._shadowRoot.appendChild(this._tagContainer);
-        }
+        // End - Getters and Setters
 
         loadthis(){
 			
@@ -166,7 +153,18 @@ series.slices.template.fillModifier = fillModifier;
 series.alignLabels = true;
 
 series.labels.template.text = "{category}: [bold]{value}[/]";
+		
 // end am4core.ready()
+		
+		if (this._tagContainer){
+                this._tagContainer.parentNode.removeChild(this._tagContainer);
+            }
+
+            var shadow = window.getSelection(this._shadowRoot);
+            this._tagContainer = document.createElement(this._tagType);
+            var theText = document.createTextNode(this._tagText);    
+            this._tagContainer.appendChild(theText); 
+            this._shadowRoot.appendChild(this._tagContainer);
         }
     
     
